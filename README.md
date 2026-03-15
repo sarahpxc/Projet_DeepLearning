@@ -30,7 +30,7 @@ test : utilisé pour tester le modèle final
 
 Structure du dataset :
 
-dataset/
+dataset
 
   train
   
