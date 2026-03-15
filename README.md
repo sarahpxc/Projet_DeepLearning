@@ -30,22 +30,22 @@ test : utilisé pour tester le modèle final
 
 Structure du dataset :
 
-dataset
+dataset/
 
-  train
+  train/
   
-    images
-    labels
+    images/
+    labels/
 
-  valid
+  valid/
   
-    images
-    labels
+    images/
+    labels/
 
-  test
+  test/
   
-    images
-    labels
+    images/
+    labels/
 
 # Modèle utilisé
 
