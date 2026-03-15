@@ -115,3 +115,139 @@ la bounding box détectée
 la confiance du modèle
 
 la décision d’atterrissage
+
+# Reproduction du projet 
+
+# Installer les dépendances
+
+pip install ultralytics opencv-python pillow pyyaml
+
+# Vérifier l’organisation des fichiers
+
+Le projet doit contenir au minimum les éléments suivants :
+
+projet/
+│
+├── train/
+│   ├── images/
+│   └── labels/
+│
+├── valid/
+│   ├── images/
+│   └── labels/
+│
+├── test/
+│   ├── images/
+│   └── labels/
+│
+├── data.yaml
+├── safe_drone_landing_vscode.ipynb
+└── README.md
+
+Le fichier data.yaml doit pointer vers les dossiers du dataset.
+
+Exemple :
+
+train: train/images
+val: valid/images
+test: test/images
+
+nc: 1
+names: ['landing_pad']
+
+# Ouvrir le notebook
+
+Ouvrir le fichier :
+
+safe_drone_landing_vscode.ipynb
+
+# Exécuter l’entraînement
+
+Dans le notebook, modifier si besoin la variable DATA_YAML pour qu’elle pointe vers le bon fichier data.yaml.
+
+Exemple :
+
+DATA_YAML = r"C:chemin d'accès"
+
+Puis exécuter les cellules d’entraînement du notebook.
+
+Le modèle est entraîné avec YOLOv8 à partir du poids pré-entraîné yolov8n.pt.
+
+À la fin de l’entraînement, le meilleur modèle est sauvegardé automatiquement dans :
+
+runs/detect/train/weights/best.pt
+
+# Évaluer le modèle
+
+Après l’entraînement, charger le meilleur modèle :
+
+from ultralytics import YOLO
+
+best_model = YOLO("runs/detect/train/weights/best.pt")
+
+Puis exécuter l’évaluation :
+
+metrics = best_model.val(data=DATA_YAML)
+metrics
+
+Cette étape permet d’obtenir les métriques de détection : précision, rappel et mAP.
+
+# Tester le modèle sur une image
+
+Pour tester le modèle sur une nouvelle image :
+
+results = best_model.predict(
+    source=r"C:chemin d'accès",
+    conf=0.25,
+    save=True
+)
+
+L’image avec la bounding box détectée sera sauvegardée dans un dossier runs/detect/predict.
+
+# Exécuter la décision SAFE / NOT SAFE
+
+Le projet ne se limite pas à détecter le landing pad. Une décision d’atterrissage est prise à partir de :
+
+la confiance de détection tau_conf
+
+la taille relative de la bounding box tau_area
+
+La règle utilisée est la suivante :
+
+SAFE si confidence >= tau_conf et area_ratio >= tau_area
+
+sinon NOT SAFE
+
+# Lancer la démonstration webcam
+
+Le notebook contient également une cellule permettant de lancer la webcam en temps réel.
+
+Le programme :
+
+détecte le landing pad
+
+affiche la bounding box
+
+affiche la confiance
+
+affiche la décision SAFE / NOT SAFE
+
+Pour arrêter l’exécution :
+
+appuyer sur la touche Q
+
+ou fermer la fenêtre OpenCV
+
+# Résultat attendu
+
+Si toutes les étapes précédentes sont suivies correctement, l’utilisateur doit pouvoir :
+
+entraîner le modèle YOLOv8 sur le dataset fourni
+
+évaluer les performances du modèle
+
+tester la détection sur de nouvelles images
+
+exécuter la démonstration webcam
+
+obtenir une décision finale SAFE / NOT SAFE
