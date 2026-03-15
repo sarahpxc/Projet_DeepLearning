@@ -32,20 +32,17 @@ Structure du dataset :
 
 dataset/
 
-  train/
-  
-    images/
-    labels/
+    train/ 
+      images/
+      labels/
 
-  valid/
-  
-    images/
-    labels/
+    valid/  
+      images/
+      labels/
 
-  test/
-  
-    images/
-    labels/
+    test/  
+      images/
+      labels/
 
 # Modèle utilisé
 
