@@ -30,19 +30,19 @@ test : utilisé pour tester le modèle final
 
 Structure du dataset :
 
-dataset/
-
-    train/ 
-      images/
-      labels/
-
-    valid/  
-      images/
-      labels/
-
-    test/  
-      images/
-      labels/
+    dataset/
+    
+        train/ 
+          images/
+          labels/
+    
+        valid/  
+          images/
+          labels/
+    
+        test/  
+          images/
+          labels/
 
 # Modèle utilisé
 
@@ -126,23 +126,23 @@ pip install ultralytics opencv-python pillow pyyaml
 
 Le projet doit contenir au minimum les éléments suivants :
 
-projet/
-│
-├── train/
-│   ├── images/
-│   └── labels/
-│
-├── valid/
-│   ├── images/
-│   └── labels/
-│
-├── test/
-│   ├── images/
-│   └── labels/
-│
-├── data.yaml
-├── safe_drone_landing_vscode.ipynb
-└── README.md
+    projet/
+    │
+    ├── train/
+    │   ├── images/
+    │   └── labels/
+    │
+    ├── valid/
+    │   ├── images/
+    │   └── labels/
+    │
+    ├── test/
+    │   ├── images/
+    │   └── labels/
+    │
+    ├── data.yaml
+    ├── safe_drone_landing_vscode.ipynb
+    └── README.md
 
 Le fichier data.yaml doit pointer vers les dossiers du dataset.
 
